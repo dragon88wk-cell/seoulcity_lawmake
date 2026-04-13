@@ -13,11 +13,12 @@ DATA_FILE = "last_posts.json"
 SITES_TO_MONITOR = {
     "서울시_계약마당": {
         "url": "https://contract.seoul.go.kr/new1/views/pubBidInfo.do",
-        # 아래는 대부분의 관공서 게시판에서 쓰이는 보편적인 형태를 임의로 넣은 것입니다.
-        # 만약 글을 못 찾는다면 이 부분을 실제 사이트에 맞게 수정해야 합니다.
-        "post_list_selector": "table tbody tr",  
-        "post_id_selector": "td:nth-child(1)",    # 보통 첫 번째 칸이 글 번호
-        "post_title_selector": "td:nth-child(3) a, td.title a" # 보통 세 번째 칸이나 title 클래스에 제목 링크가 있음
+        # 1. 목록 선택자: 해당 테이블 안에서 'setst' 클래스를 가진 td(칸)들을 모두 찾습니다.
+        "post_list_selector": "table.list-tbl-01 tbody td.setst",  
+        
+        # 2. 번호 & 제목 선택자: 번호를 추출하기 까다로우므로, 제목(<a> 태그)을 번호 대용으로 씁니다.
+        "post_id_selector": "a",    
+        "post_title_selector": "a"  
     }
 }
 
